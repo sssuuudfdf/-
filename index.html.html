@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국과학교육멘토연합(한과연) — 초기 운영진 모집</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1A2E;
+    --bg-panel:#162443;
+    --bg-panel-2:#1B2C52;
+    --text:#ECEEE6;
+    --sub:#93A0B8;
+    --line:rgba(236,238,230,0.12);
+    --line-strong:rgba(236,238,230,0.22);
+    --mint:#57D9A6;
+    --amber:#F2B84B;
+    --max:760px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'IBM Plex Sans KR', sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* faint dot texture across whole page */
+  body{
+    background-image: radial-gradient(rgba(236,238,230,0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+
+  nav{
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; background:rgba(15,26,46,0.85);
+    backdrop-filter:blur(8px); z-index:50;
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:60px; max-width:900px;
+  }
+  .brand{font-weight:600; font-size:0.95rem; letter-spacing:0.01em; display:flex; align-items:center; gap:8px;}
+  .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--mint); box-shadow:0 0 10px var(--mint);}
+  .nav-cta{
+    font-size:0.85rem; font-weight:600; color:var(--mint);
+    border-bottom:1px solid var(--mint); padding-bottom:2px;
+  }
+
+  /* ---------- HERO with glow ---------- */
+  .hero{
+    padding:104px 0 78px;
+    position:relative; overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; top:-220px; left:50%; transform:translateX(-50%);
+    width:900px; height:520px;
+    background: radial-gradient(circle, rgba(87,217,166,0.16) 0%, rgba(87,217,166,0) 70%);
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem; color:var(--mint); letter-spacing:0.05em;
+    margin-bottom:22px;
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid rgba(87,217,166,0.35); padding:6px 12px;
+    background:rgba(87,217,166,0.06);
+  }
+  h1.headline{
+    font-size:clamp(2rem, 4.6vw, 2.9rem);
+    font-weight:700; line-height:1.42; letter-spacing:-0.01em;
+  }
+  h1.headline .accent{color:var(--mint);}
+  .hero-sub{
+    margin-top:24px; font-size:1.02rem; color:var(--sub); max-width:560px;
+  }
+  .hero-ctas{margin-top:38px; display:flex; gap:12px; flex-wrap:wrap;}
+  .btn-primary{
+    display:inline-block; background:var(--mint); color:#0F1A2E;
+    font-weight:700; font-size:0.9rem; padding:14px 24px;
+    box-shadow:0 8px 24px rgba(87,217,166,0.22);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 10px 28px rgba(87,217,166,0.3);}
+  .btn-secondary{
+    display:inline-block; font-weight:600; font-size:0.9rem; padding:14px 24px;
+    border:1px solid var(--line-strong); color:var(--text);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .btn-secondary:hover{border-color:var(--mint); background:rgba(87,217,166,0.06);}
+
+  section{padding:68px 0; border-top:1px solid var(--line);}
+  .num-tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--mint);
+    margin-bottom:14px; letter-spacing:0.03em;
+  }
+  h2.sec-title{
+    font-size:clamp(1.4rem, 2.7vw, 1.8rem); font-weight:700; letter-spacing:-0.01em;
+    max-width:600px;
+  }
+  .sec-desc{margin-top:14px; font-size:0.97rem; color:var(--sub); max-width:560px;}
+
+  /* pitch */
+  .pitch-grid{margin-top:40px; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  .pitch-card{background:var(--bg-panel); padding:28px;}
+  .pitch-card .role{font-weight:700; font-size:1rem; margin-bottom:10px;}
+  .pitch-card.edu .role{color:var(--mint);}
+  .pitch-card.eng .role{color:var(--amber);}
+  .pitch-card p{color:var(--sub); font-size:0.92rem;}
+
+  /* callout */
+  .callout{background:linear-gradient(180deg, var(--bg-panel-2), var(--bg)); border-top:1px solid var(--line);}
+  .callout .num-tag{color:var(--amber);}
+  .callout h2{font-size:clamp(1.4rem,2.9vw,1.8rem); font-weight:700; max-width:600px; line-height:1.5;}
+  .callout p{margin-top:16px; color:var(--sub); font-size:0.96rem; max-width:580px;}
+  .callout .note{
+    margin-top:26px; padding:20px 22px;
+    border-left:2px solid var(--amber); background:rgba(242,184,75,0.06);
+    font-size:0.93rem; color:var(--text); max-width:560px;
+  }
+
+  /* timeline */
+  .timeline{margin-top:40px;}
+  .tl-row{
+    display:grid; grid-template-columns:48px 1fr; gap:20px;
+    padding:22px 0; border-top:1px solid var(--line);
+  }
+  .tl-row:last-child{border-bottom:1px solid var(--line);}
+  .tl-num{
+    font-family:'IBM Plex Mono', monospace; font-size:0.85rem; color:var(--mint);
+    padding-top:2px;
+  }
+  .tl-body h3{font-size:0.99rem; font-weight:600; margin-bottom:4px;}
+  .tl-body p{font-size:0.88rem; color:var(--sub);}
+
+  /* asset */
+  .asset-wrap{margin-top:40px;}
+  .asset-wrap p{color:var(--sub); font-size:0.95rem; margin-bottom:14px; max-width:580px;}
+  .royalty-line{
+    display:flex; align-items:baseline; gap:14px; margin:26px 0;
+    padding:22px 24px; background:linear-gradient(120deg, rgba(87,217,166,0.14), rgba(87,217,166,0.02));
+    border:1px solid rgba(87,217,166,0.28);
+  }
+  .royalty-line .big{font-family:'IBM Plex Mono', monospace; font-size:1.9rem; font-weight:700; color:var(--mint);}
+  .royalty-line .small{font-size:0.88rem; color:var(--sub);}
+  .dash-panel{
+    margin-top:32px; border:1px solid var(--line-strong); background:var(--bg-panel);
+  }
+  .dash-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 20px; border-bottom:1px solid var(--line);
+  }
+  .dash-head .dash-name{
+    font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--sub); letter-spacing:0.03em;
+  }
+  .dash-head .dash-sample{
+    font-size:0.72rem; color:var(--amber); border:1px solid rgba(242,184,75,0.4);
+    padding:3px 9px; background:rgba(242,184,75,0.06);
+  }
+  .stat-row{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line);
+  }
+  .stat-cell{background:var(--bg-panel); padding:22px 18px; transition:background .15s ease;}
+  .stat-cell:hover{background:var(--bg-panel-2);}
+  .stat-cell .stat-label{font-size:0.76rem; color:var(--sub); margin-bottom:12px;}
+  .stat-cell .stat-val{font-family:'IBM Plex Mono', monospace; font-size:1.5rem; font-weight:700; color:var(--mint);}
+  .stat-cell .stat-val .unit{font-size:0.85rem; font-weight:500; color:var(--sub); margin-left:2px;}
+  .stat-cell .stat-delta{font-size:0.74rem; color:var(--mint); margin-top:6px;}
+  .stat-cell .stat-delta.flat{color:var(--sub);}
+  .spark{
+    display:flex; align-items:flex-end; gap:3px; height:28px; margin-top:14px;
+  }
+  .spark i{
+    flex:1; background:var(--line-strong); border-radius:1px;
+  }
+  .spark i.on{background:var(--mint);}
+  .dash-foot{
+    padding:12px 20px; font-size:0.76rem; color:var(--sub); border-top:1px solid var(--line);
+  }
+
+  /* team leaderboard */
+  .lb-panel{
+    margin-top:20px; border:1px solid var(--line-strong); background:var(--bg-panel);
+  }
+  .lb-row{
+    display:grid; grid-template-columns:40px 1fr 90px 100px; gap:14px; align-items:center;
+    padding:16px 20px; border-top:1px solid var(--line);
+  }
+  .lb-panel .lb-row:first-of-type{border-top:none;}
+  .lb-rank{
+    font-family:'IBM Plex Mono', monospace; font-size:0.95rem; color:var(--sub); font-weight:600;
+  }
+  .lb-row.top .lb-rank{color:var(--mint);}
+  .lb-row.top{background:rgba(87,217,166,0.05);}
+  .lb-team .team-name{font-size:0.92rem; font-weight:600;}
+  .lb-team .program-name{font-size:0.8rem; color:var(--sub); margin-top:2px;}
+  .lb-metric{font-family:'IBM Plex Mono', monospace; font-size:0.86rem; text-align:right;}
+  .lb-metric .lb-label{display:block; font-family:'IBM Plex Sans KR',sans-serif; font-size:0.7rem; color:var(--sub); font-weight:400; margin-bottom:3px;}
+  .lb-metric.sat{color:var(--mint);}
+  .lb-metric.rev{color:var(--amber);}
+
+  /* fit */
+  .fit-grid{margin-top:40px; display:grid; grid-template-columns:1fr; gap:0;}
+  .fit-row{
+    display:grid; grid-template-columns:140px 1fr; gap:24px;
+    padding:26px 0; border-top:1px solid var(--line);
+  }
+  .fit-row:last-child{border-bottom:1px solid var(--line);}
+  .fit-row .fit-label{font-weight:700; font-size:0.96rem;}
+  .fit-row:nth-child(1) .fit-label{color:var(--mint);}
+  .fit-row:nth-child(2) .fit-label{color:var(--amber);}
+  .fit-row ul{list-style:none;}
+  .fit-row li{font-size:0.9rem; color:var(--sub); padding:5px 0;}
+
+  /* team */
+  .team-grid{margin-top:40px; display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .team-card{background:var(--bg-panel); padding:24px 18px; transition:background .15s ease;}
+  .team-card:hover{background:var(--bg-panel-2);}
+  .team-card .name{font-weight:700; font-size:0.98rem;}
+  .team-card .track{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--mint); margin-top:10px; display:block;}
+  .team-card .track.eng{color:var(--amber);}
+  .team-card .major{margin-top:8px; font-size:0.84rem; color:var(--sub);}
+
+  /* roles */
+  .roles-list{margin-top:36px;}
+  .role-row{
+    display:grid; grid-template-columns:180px 1fr; gap:24px;
+    padding:20px 0; border-top:1px solid var(--line);
+  }
+  .role-row:last-child{border-bottom:1px solid var(--line);}
+  .role-row .role-title{font-weight:600; font-size:0.95rem; color:var(--mint);}
+  .role-row .role-desc{font-size:0.88rem; color:var(--sub);}
+
+  /* apply */
+  .apply{background:linear-gradient(180deg, var(--bg), var(--bg-panel-2)); border-top:1px solid var(--line);}
+  .apply .num-tag{color:var(--amber);}
+  .apply-card{
+    margin-top:36px; display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:20px; padding:28px; border:1px solid var(--line-strong);
+    background:rgba(87,217,166,0.04);
+  }
+  .apply-info .who{font-size:0.82rem; color:var(--sub); margin-bottom:6px;}
+  .apply-info .contact{font-family:'IBM Plex Mono', monospace; font-size:1.25rem; font-weight:700; color:var(--mint);}
+
+  footer{padding:30px 0; text-align:center; color:var(--sub); font-size:0.8rem; border-top:1px solid var(--line);}
+
+  [data-reveal]{opacity:0; transform:translateY(12px); transition:opacity .55s ease, transform .55s ease;}
+  [data-reveal].in{opacity:1; transform:translateY(0);}
+
+  @media (max-width: 700px){
+    .pitch-grid{grid-template-columns:1fr;}
+    .stat-row{grid-template-columns:1fr 1fr;}
+    .fit-row{grid-template-columns:1fr; gap:8px;}
+    .team-grid{grid-template-columns:1fr 1fr;}
+    .role-row{grid-template-columns:1fr; gap:6px;}
+    .apply-card{flex-direction:column; align-items:flex-start;}
+    .lb-row{grid-template-columns:1fr; row-gap:6px;}
+    .lb-metric{text-align:left;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    [data-reveal]{opacity:1; transform:none; transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>한과연</div>
+    <a class="nav-cta" href="#apply">지원 문의</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">한과연 — 초기 운영진 모집</div>
+    <h1 class="headline">과학을 배우는 사람에서,<br>과학을 <span class="accent">가르치는 사람</span>으로.</h1>
+    <p class="hero-sub">교육계열과 이공계열 대학생이 함께 STEM 교육 프로그램을 설계하고, 실제 학생들 앞에서 두 번 검증하는 동아리. 한국과학교육멘토연합의 '처음'을 함께 만들 사람을 찾습니다.</p>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="#apply">초기 운영진 지원하기</a>
+      <a class="btn-secondary" href="#flow">한 학기 흐름 보기</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="num-tag">01 · Who We Are</div>
+    <h2 class="sec-title">서로 다른 전공이, 같은 프로그램을 만듭니다</h2>
+    <p class="sec-desc">교육계열은 배움을, 이공계열은 지식과 기술을 맡습니다. 각자의 전공만으로는 완성할 수 없는 교육을, 함께여서 완성합니다.</p>
+
+    <div class="pitch-grid" data-reveal>
+      <div class="pitch-card edu">
+        <div class="role">교육계열이 하는 일</div>
+        <p>교육과 수업을 설계합니다. 아두이노·코딩 등 공학 스터디로 낯선 역량을 새로 배우고, 만든 커리큘럼을 실전 수업으로 검증합니다.</p>
+      </div>
+      <div class="pitch-card eng">
+        <div class="role">이공계열이 하는 일</div>
+        <p>과학·공학 지식과 기술을 콘텐츠로 구현합니다. 기획부터 개발까지 전 과정을 경험하고, 교육 스터디로 콘텐츠 기획 역량까지 쌓습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="callout">
+  <div class="wrap">
+    <div class="num-tag">02 · 그런데 지금은 조금 다릅니다</div>
+    <h2 data-reveal>한과연은 아직 정식으로 만들어지지 않았습니다.</h2>
+    <p data-reveal>그래서 지금 모집하는 사람은 1기 부원이 아닙니다. 우리가 찾는 사람은 동아리 운영 구조·스터디·프로젝트 운영 방식·성과관리 체계를 직접 설계하고, 소규모로 데모까지 돌려보며 정식 출범을 준비할 초기 운영진입니다.</p>
+    <p class="note" data-reveal>이미 만들어진 동아리에 들어가는 게 아니라, "내가 동아리를 만든다면 어떻게 운영할까?"를 고민해보고 싶은 분을 기다립니다.</p>
+  </div>
+</section>
+
+<section id="flow">
+  <div class="wrap">
+    <div class="num-tag">03 · Program Flow</div>
+    <h2 class="sec-title">한 학기, 이렇게 채워갑니다</h2>
+    <p class="sec-desc">만들고 끝나는 게 아니라, 진짜 아이들 앞에서 두 번 검증받습니다.</p>
+
+    <div class="timeline" data-reveal>
+      <div class="tl-row"><div class="tl-num">01</div><div class="tl-body"><h3>OT · 팀 빌딩</h3><p>학기를 함께할 팀을 꾸리고 방향을 맞춥니다.</p></div></div>
+      <div class="tl-row"><div class="tl-num">02</div><div class="tl-body"><h3>교육 스터디 · 공학 스터디 (2차시)</h3><p>이론을 배우고 바로 적용해보며 서로의 전공 언어를 익힙니다.</p></div></div>
+      <div class="tl-row"><div class="tl-num">03</div><div class="tl-body"><h3>팀별 교육 프로그램 설계</h3><p>배운 것을 바탕으로 팀마다 하나의 교육 프로그램을 기획합니다.</p></div></div>
+      <div class="tl-row"><div class="tl-num">04</div><div class="tl-body"><h3>1차 파일럿 수업 · 성과 공유회</h3><p>지역아동센터나 학교로 나가 실제 학생들 앞에서 처음 검증받습니다.</p></div></div>
+      <div class="tl-row"><div class="tl-num">05</div><div class="tl-body"><h3>피드백 보완</h3><p>학생과 동아리 구성원의 피드백을 남은 학기 동안 정성껏 반영합니다.</p></div></div>
+      <div class="tl-row"><div class="tl-num">06</div><div class="tl-body"><h3>방학 중 2차 검증</h3><p>교육의 효과성과 실효성을 최종적으로 확인합니다.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="num-tag">04 · Your Asset</div>
+    <h2 class="sec-title">내가 만든 교육이, 자산이 됩니다</h2>
+
+    <div class="asset-wrap" data-reveal>
+      <p>완성된 프로그램은 자체 플랫폼 <strong>'KitHub'</strong>에 아카이빙되고, 지식재산권처럼 팀의 자산으로 관리됩니다. 한과연과 연계된 스타트업이 이 프로그램으로 수익을 창출하면, 그 수익의 일부가 프로그램을 만든 팀에게 돌아갑니다.</p>
+
+      <div class="royalty-line">
+        <span class="big">3%</span>
+        <span class="small">한과연 연계 스타트업 수익 중 프로그램 제작팀에게 지급되는 비율</span>
+      </div>
+
+      <p>"동아리 활동했어요"가 아니라, "제가 만든 교육이 이만큼의 학생에게, 이만큼의 가치를 만들었습니다"라고 말할 수 있는 스펙이 됩니다. 매 학기 쌓이는 프로그램은 대시보드에서 수치로 확인할 수 있어요.</p>
+
+      <div class="dash-panel">
+        <div class="dash-head">
+          <span class="dash-name">KitHub / Team Dashboard</span>
+          <span class="dash-sample">예시 화면</span>
+        </div>
+        <div class="stat-row">
+          <div class="stat-cell">
+            <div class="stat-label">교육 만족도</div>
+            <div class="stat-val">94<span class="unit">%</span></div>
+            <div class="stat-delta">▲ 지난 회차 대비 6%p</div>
+            <div class="spark"><i style="height:35%"></i><i style="height:50%"></i><i style="height:40%"></i><i style="height:70%"></i><i class="on" style="height:100%"></i></div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">누적 수익</div>
+            <div class="stat-val">128<span class="unit">만원</span></div>
+            <div class="stat-delta">▲ 이번 학기 누적</div>
+            <div class="spark"><i style="height:20%"></i><i style="height:30%"></i><i style="height:55%"></i><i style="height:75%"></i><i class="on" style="height:100%"></i></div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">프로그램 순위</div>
+            <div class="stat-val">1<span class="unit">위 / 6팀</span></div>
+            <div class="stat-delta">▲ 만족도 기준</div>
+            <div class="spark"><i style="height:60%"></i><i style="height:45%"></i><i style="height:70%"></i><i style="height:85%"></i><i class="on" style="height:100%"></i></div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">아카이빙 건수</div>
+            <div class="stat-val">3<span class="unit">건</span></div>
+            <div class="stat-delta flat">1차 파일럿 기준</div>
+            <div class="spark"><i style="height:33%"></i><i style="height:33%"></i><i style="height:66%"></i><i style="height:66%"></i><i class="on" style="height:100%"></i></div>
+          </div>
+        </div>
+        <div class="dash-foot">* 정식 출범 전 예시 데이터입니다. 실제 운영 시 팀별 수치로 채워집니다.</div>
+      </div>
+
+      <p style="margin-top:28px;">완성된 프로그램은 팀별로 나란히 순위가 매겨져, 내 프로그램이 다른 팀과 비교해 어느 정도 위치인지 한눈에 보입니다.</p>
+
+      <div class="lb-panel">
+        <div class="dash-head">
+          <span class="dash-name">KitHub / Program Leaderboard</span>
+          <span class="dash-sample">예시 화면</span>
+        </div>
+        <div class="lb-row top">
+          <div class="lb-rank">01</div>
+          <div class="lb-team"><div class="team-name">Team 리틀뉴턴</div><div class="program-name">고등 대상 · 힘과 운동 실험 키트</div></div>
+          <div class="lb-metric sat"><span class="lb-label">만족도</span>94%</div>
+          <div class="lb-metric rev"><span class="lb-label">누적 수익</span>128만원</div>
+        </div>
+        <div class="lb-row">
+          <div class="lb-rank">02</div>
+          <div class="lb-team"><div class="team-name">Team 코드마루</div><div class="program-name">중등 대상 · 아두이노 피지컬 컴퓨팅</div></div>
+          <div class="lb-metric sat"><span class="lb-label">만족도</span>91%</div>
+          <div class="lb-metric rev"><span class="lb-label">누적 수익</span>96만원</div>
+        </div>
+        <div class="lb-row">
+          <div class="lb-rank">03</div>
+          <div class="lb-team"><div class="team-name">Team 에코랩</div><div class="program-name">중등 대상 · 생태 관찰 프로젝트</div></div>
+          <div class="lb-metric sat"><span class="lb-label">만족도</span>88%</div>
+          <div class="lb-metric rev"><span class="lb-label">누적 수익</span>74만원</div>
+        </div>
+        <div class="lb-row">
+          <div class="lb-rank">04</div>
+          <div class="lb-team"><div class="team-name">Team 스파크</div><div class="program-name">중등 대상 · 회로와 전자기 기초</div></div>
+          <div class="lb-metric sat"><span class="lb-label">만족도</span>85%</div>
+          <div class="lb-metric rev"><span class="lb-label">누적 수익</span>41만원</div>
+        </div>
+        <div class="lb-row">
+          <div class="lb-rank">05</div>
+          <div class="lb-team"><div class="team-name">Team 오브젝트</div><div class="program-name">고등 대상 · 3D 모델링 입문</div></div>
+          <div class="lb-metric sat"><span class="lb-label">만족도</span>83%</div>
+          <div class="lb-metric rev"><span class="lb-label">누적 수익</span>19만원</div>
+        </div>
+        <div class="dash-foot">* 정식 출범 전 예시 데이터입니다. 순위는 교육 만족도 기준으로 매 학기 갱신됩니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="num-tag">05 · Who We're Looking For</div>
+    <h2 class="sec-title">이런 분들께 추천해요</h2>
+
+    <div class="fit-grid" data-reveal>
+      <div class="fit-row">
+        <div class="fit-label">교육계열</div>
+        <ul>
+          <li>공학계열 친구들과의 협업 기회</li>
+          <li>직접 만든 커리큘럼을 실전 수업에서 검증</li>
+          <li>아두이노·코딩 등 공학 스터디로 새 역량 학습</li>
+        </ul>
+      </div>
+      <div class="fit-row">
+        <div class="fit-label">이공계열</div>
+        <ul>
+          <li>기획부터 개발까지 전 과정 프로젝트 경험</li>
+          <li>교육계열과의 팀 협업·커뮤니케이션 경험</li>
+          <li>교육 스터디로 콘텐츠 기획 역량까지 습득</li>
+        </ul>
+      </div>
+      <div class="fit-row">
+        <div class="fit-label">공통</div>
+        <ul>
+          <li>공모전 함께 나갈 인연 만들기</li>
+          <li>내가 만든 프로그램의 지식재산권 인정 + 수익 3% 지급</li>
+          <li>데이터 대시보드로 남는 정량적 포트폴리오</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="num-tag">06 · Founding Members</div>
+    <h2 class="sec-title">지금 함께하고 있는 사람들</h2>
+    <p class="sec-desc">4명의 초기 창립 멤버가 먼저 뛰고 있습니다. 이 여정을 함께할 분들을 찾아요.</p>
+
+    <div class="team-grid" data-reveal>
+      <div class="team-card"><div class="name">김재호</div><span class="track eng">이공계열</span><div class="major">기계공학과</div></div>
+      <div class="team-card"><div class="name">이가현</div><span class="track">교육계열</span><div class="major">교육공학과</div></div>
+      <div class="team-card"><div class="name">김수희</div><span class="track">교육계열</span><div class="major">영어교육과 · 교육공학과</div></div>
+      <div class="team-card"><div class="name">김나영</div><span class="track">교육계열</span><div class="major">영어교육과</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="num-tag">07 · Founding Roles</div>
+    <h2 class="sec-title">함께할 운영진 역할</h2>
+
+    <div class="roles-list" data-reveal>
+      <div class="role-row"><div class="role-title">교육기획팀</div><div class="role-desc">세션 기획(스터디 포함), 교육 자료 제작, 개발 프로세스 설계</div></div>
+      <div class="role-row"><div class="role-title">인사재무팀</div><div class="role-desc">인사·재무 규정, 회비 및 예산 관리·결재</div></div>
+      <div class="role-row"><div class="role-title">행사기획팀</div><div class="role-desc">발대식·OT 등 각종 행사 기획·운영</div></div>
+      <div class="role-row"><div class="role-title">데이터관리팀</div><div class="role-desc">Notion 관리, KitHub 운영</div></div>
+      <div class="role-row"><div class="role-title">마케팅팀</div><div class="role-desc">대외 홍보, 홍보 콘텐츠 제작, Instagram 관리</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="apply" class="apply">
+  <div class="wrap">
+    <div class="num-tag">08 · Apply</div>
+    <h2 class="sec-title">'처음'을 함께 만들어보고 싶다면</h2>
+    <p class="sec-desc">모집 대상 — 수도권에 거주하는 교육·이공계열 전공생(재학생, 휴학생)<br>모집 형태 — 한국과학교육멘토연합 초기 운영진</p>
+
+    <div class="apply-card" data-reveal>
+      <div class="apply-info">
+        <div class="who">문의 및 신청 — 김재호</div>
+        <div class="contact">010-2969-9782</div>
+      </div>
+      <a class="btn-primary" href="tel:01029699782">전화로 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<footer>한국과학교육멘토연합(한과연) · 초기 운영진 모집</footer>
+
+<script>
+  const items = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  items.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
