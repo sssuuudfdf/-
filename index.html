@@ -152,14 +152,62 @@
   }
   .royalty-line .big{font-family:'IBM Plex Mono', monospace; font-size:1.9rem; font-weight:700; color:var(--mint);}
   .royalty-line .small{font-size:0.88rem; color:var(--sub);}
-  .stat-row{
-    margin-top:32px; display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
-    background:var(--line); border:1px solid var(--line);
+  .dash-panel{
+    margin-top:32px; border:1px solid var(--line-strong); background:var(--bg-panel);
   }
-  .stat-cell{background:var(--bg-panel); padding:20px 16px; transition:background .15s ease;}
+  .dash-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 20px; border-bottom:1px solid var(--line);
+  }
+  .dash-head .dash-name{
+    font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--sub); letter-spacing:0.03em;
+  }
+  .dash-head .dash-sample{
+    font-size:0.72rem; color:var(--amber); border:1px solid rgba(242,184,75,0.4);
+    padding:3px 9px; background:rgba(242,184,75,0.06);
+  }
+  .stat-row{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line);
+  }
+  .stat-cell{background:var(--bg-panel); padding:22px 18px; transition:background .15s ease;}
   .stat-cell:hover{background:var(--bg-panel-2);}
-  .stat-cell .stat-label{font-size:0.76rem; color:var(--sub); margin-bottom:10px;}
-  .stat-cell .stat-val{font-family:'IBM Plex Mono', monospace; font-size:1rem; font-weight:600; color:var(--mint);}
+  .stat-cell .stat-label{font-size:0.76rem; color:var(--sub); margin-bottom:12px;}
+  .stat-cell .stat-val{font-family:'IBM Plex Mono', monospace; font-size:1.5rem; font-weight:700; color:var(--mint);}
+  .stat-cell .stat-val .unit{font-size:0.85rem; font-weight:500; color:var(--sub); margin-left:2px;}
+  .stat-cell .stat-delta{font-size:0.74rem; color:var(--mint); margin-top:6px;}
+  .stat-cell .stat-delta.flat{color:var(--sub);}
+  .spark{
+    display:flex; align-items:flex-end; gap:3px; height:28px; margin-top:14px;
+  }
+  .spark i{
+    flex:1; background:var(--line-strong); border-radius:1px;
+  }
+  .spark i.on{background:var(--mint);}
+  .dash-foot{
+    padding:12px 20px; font-size:0.76rem; color:var(--sub); border-top:1px solid var(--line);
+  }
+
+  /* team leaderboard */
+  .lb-panel{
+    margin-top:20px; border:1px solid var(--line-strong); background:var(--bg-panel);
+  }
+  .lb-row{
+    display:grid; grid-template-columns:40px 1fr 90px 100px; gap:14px; align-items:center;
+    padding:16px 20px; border-top:1px solid var(--line);
+  }
+  .lb-panel .lb-row:first-of-type{border-top:none;}
+  .lb-rank{
+    font-family:'IBM Plex Mono', monospace; font-size:0.95rem; color:var(--sub); font-weight:600;
+  }
+  .lb-row.top .lb-rank{color:var(--mint);}
+  .lb-row.top{background:rgba(87,217,166,0.05);}
+  .lb-team .team-name{font-size:0.92rem; font-weight:600;}
+  .lb-team .program-name{font-size:0.8rem; color:var(--sub); margin-top:2px;}
+  .lb-metric{font-family:'IBM Plex Mono', monospace; font-size:0.86rem; text-align:right;}
+  .lb-metric .lb-label{display:block; font-family:'IBM Plex Sans KR',sans-serif; font-size:0.7rem; color:var(--sub); font-weight:400; margin-bottom:3px;}
+  .lb-metric.sat{color:var(--mint);}
+  .lb-metric.rev{color:var(--amber);}
 
   /* fit */
   .fit-grid{margin-top:40px; display:grid; grid-template-columns:1fr; gap:0;}
@@ -216,6 +264,8 @@
     .team-grid{grid-template-columns:1fr 1fr;}
     .role-row{grid-template-columns:1fr; gap:6px;}
     .apply-card{flex-direction:column; align-items:flex-start;}
+    .lb-row{grid-template-columns:1fr; row-gap:6px;}
+    .lb-metric{text-align:left;}
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
@@ -304,11 +354,78 @@
 
       <p>"동아리 활동했어요"가 아니라, "제가 만든 교육이 이만큼의 학생에게, 이만큼의 가치를 만들었습니다"라고 말할 수 있는 스펙이 됩니다. 매 학기 쌓이는 프로그램은 대시보드에서 수치로 확인할 수 있어요.</p>
 
-      <div class="stat-row">
-        <div class="stat-cell"><div class="stat-label">교육 만족도</div><div class="stat-val">Dashboard</div></div>
-        <div class="stat-cell"><div class="stat-label">누적 수익</div><div class="stat-val">Dashboard</div></div>
-        <div class="stat-cell"><div class="stat-label">프로그램 순위</div><div class="stat-val">Dashboard</div></div>
-        <div class="stat-cell"><div class="stat-label">아카이빙 건수</div><div class="stat-val">Dashboard</div></div>
+      <div class="dash-panel">
+        <div class="dash-head">
+          <span class="dash-name">KitHub / Team Dashboard</span>
+          <span class="dash-sample">예시 화면</span>
+        </div>
+        <div class="stat-row">
+          <div class="stat-cell">
+            <div class="stat-label">교육 만족도</div>
+            <div class="stat-val">94<span class="unit">%</span></div>
+            <div class="stat-delta">▲ 지난 회차 대비 6%p</div>
+            <div class="spark"><i style="height:35%"></i><i style="height:50%"></i><i style="height:40%"></i><i style="height:70%"></i><i class="on" style="height:100%"></i></div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">누적 수익</div>
+            <div class="stat-val">128<span class="unit">만원</span></div>
+            <div class="stat-delta">▲ 이번 학기 누적</div>
+            <div class="spark"><i style="height:20%"></i><i style="height:30%"></i><i style="height:55%"></i><i style="height:75%"></i><i class="on" style="height:100%"></i></div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">프로그램 순위</div>
+            <div class="stat-val">1<span class="unit">위 / 6팀</span></div>
+            <div class="stat-delta">▲ 만족도 기준</div>
+            <div class="spark"><i style="height:60%"></i><i style="height:45%"></i><i style="height:70%"></i><i style="height:85%"></i><i class="on" style="height:100%"></i></div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">아카이빙 건수</div>
+            <div class="stat-val">3<span class="unit">건</span></div>
+            <div class="stat-delta flat">1차 파일럿 기준</div>
+            <div class="spark"><i style="height:33%"></i><i style="height:33%"></i><i style="height:66%"></i><i style="height:66%"></i><i class="on" style="height:100%"></i></div>
+          </div>
+        </div>
+        <div class="dash-foot">* 정식 출범 전 예시 데이터입니다. 실제 운영 시 팀별 수치로 채워집니다.</div>
+      </div>
+
+      <p style="margin-top:28px;">완성된 프로그램은 팀별로 나란히 순위가 매겨져, 내 프로그램이 다른 팀과 비교해 어느 정도 위치인지 한눈에 보입니다.</p>
+
+      <div class="lb-panel">
+        <div class="dash-head">
+          <span class="dash-name">KitHub / Program Leaderboard</span>
+          <span class="dash-sample">예시 화면</span>
+        </div>
+        <div class="lb-row top">
+          <div class="lb-rank">01</div>
+          <div class="lb-team"><div class="team-name">Team 리틀뉴턴</div><div class="program-name">고등 대상 · 힘과 운동 실험 키트</div></div>
+          <div class="lb-metric sat"><span class="lb-label">만족도</span>94%</div>
+          <div class="lb-metric rev"><span class="lb-label">누적 수익</span>128만원</div>
+        </div>
+        <div class="lb-row">
+          <div class="lb-rank">02</div>
+          <div class="lb-team"><div class="team-name">Team 코드마루</div><div class="program-name">중등 대상 · 아두이노 피지컬 컴퓨팅</div></div>
+          <div class="lb-metric sat"><span class="lb-label">만족도</span>91%</div>
+          <div class="lb-metric rev"><span class="lb-label">누적 수익</span>96만원</div>
+        </div>
+        <div class="lb-row">
+          <div class="lb-rank">03</div>
+          <div class="lb-team"><div class="team-name">Team 에코랩</div><div class="program-name">중등 대상 · 생태 관찰 프로젝트</div></div>
+          <div class="lb-metric sat"><span class="lb-label">만족도</span>88%</div>
+          <div class="lb-metric rev"><span class="lb-label">누적 수익</span>74만원</div>
+        </div>
+        <div class="lb-row">
+          <div class="lb-rank">04</div>
+          <div class="lb-team"><div class="team-name">Team 스파크</div><div class="program-name">중등 대상 · 회로와 전자기 기초</div></div>
+          <div class="lb-metric sat"><span class="lb-label">만족도</span>85%</div>
+          <div class="lb-metric rev"><span class="lb-label">누적 수익</span>41만원</div>
+        </div>
+        <div class="lb-row">
+          <div class="lb-rank">05</div>
+          <div class="lb-team"><div class="team-name">Team 오브젝트</div><div class="program-name">고등 대상 · 3D 모델링 입문</div></div>
+          <div class="lb-metric sat"><span class="lb-label">만족도</span>83%</div>
+          <div class="lb-metric rev"><span class="lb-label">누적 수익</span>19만원</div>
+        </div>
+        <div class="dash-foot">* 정식 출범 전 예시 데이터입니다. 순위는 교육 만족도 기준으로 매 학기 갱신됩니다.</div>
       </div>
     </div>
   </div>
