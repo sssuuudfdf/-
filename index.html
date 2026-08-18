@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0F1A2E;
-    --bg-panel:#162443;
-    --bg-panel-2:#1B2C52;
-    --text:#ECEEE6;
-    --sub:#93A0B8;
-    --line:rgba(236,238,230,0.12);
-    --line-strong:rgba(236,238,230,0.22);
-    --mint:#57D9A6;
-    --amber:#F2B84B;
+    --bg:#FAFAF7;
+    --bg-panel:#F2F3EC;
+    --bg-panel-2:#E9EBE0;
+    --text:#14213D;
+    --sub:#5B6472;
+    --line:rgba(20,33,61,0.10);
+    --line-strong:rgba(20,33,61,0.20);
+    --mint:#0E9C71;
+    --amber:#B8790E;
     --max:760px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -32,27 +32,51 @@
   }
   /* faint dot texture across whole page */
   body{
-    background-image: radial-gradient(rgba(236,238,230,0.05) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(20,33,61,0.05) 1px, transparent 1px);
     background-size: 22px 22px;
   }
   a{color:inherit;}
   .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
 
   nav{
-    border-bottom:1px solid var(--line);
-    position:sticky; top:0; background:rgba(15,26,46,0.85);
+    border-bottom:1px solid rgba(236,238,230,0.14);
+    position:sticky; top:0; background:rgba(15,26,46,0.92);
     backdrop-filter:blur(8px); z-index:50;
+    color:#ECEEE6;
   }
   nav .wrap{
     display:flex; align-items:center; justify-content:space-between;
-    height:60px; max-width:900px;
+    height:60px; max-width:900px; position:relative;
   }
   .brand{font-weight:600; font-size:0.95rem; letter-spacing:0.01em; display:flex; align-items:center; gap:8px;}
-  .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--mint); box-shadow:0 0 10px var(--mint);}
+  .brand .dot{width:7px;height:7px;border-radius:50%;background:#57D9A6; box-shadow:0 0 10px #57D9A6;}
+  .nav-right{display:flex; align-items:center; gap:18px;}
   .nav-cta{
-    font-size:0.85rem; font-weight:600; color:var(--mint);
-    border-bottom:1px solid var(--mint); padding-bottom:2px;
+    font-size:0.85rem; font-weight:600; color:#57D9A6;
+    border-bottom:1px solid #57D9A6; padding-bottom:2px;
   }
+  .menu-btn{
+    width:34px; height:34px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+    background:transparent; border:none; cursor:pointer; padding:0;
+  }
+  .menu-btn span{width:20px; height:2px; background:#ECEEE6; display:block; transition:transform .2s ease, opacity .2s ease;}
+  .menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .menu-btn.open span:nth-child(2){opacity:0;}
+  .menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .menu-panel{
+    position:absolute; top:60px; right:0;
+    background:rgba(13,22,40,0.98); border:1px solid rgba(236,238,230,0.14);
+    min-width:230px; max-width:90vw; display:none; flex-direction:column;
+    box-shadow:0 16px 40px rgba(0,0,0,0.35); z-index:60;
+  }
+  .menu-panel.open{display:flex;}
+  .menu-panel a{
+    padding:13px 20px; font-size:0.88rem; color:#ECEEE6;
+    border-bottom:1px solid rgba(236,238,230,0.08);
+    transition:background .15s ease, color .15s ease;
+  }
+  .menu-panel a:last-child{border-bottom:none;}
+  .menu-panel a:hover{background:rgba(87,217,166,0.08); color:#57D9A6;}
 
   /* ---------- HERO with glow ---------- */
   .hero{
@@ -68,7 +92,7 @@
   }
   .hero .wrap{position:relative;}
   .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
+    font-family:'IBM Plex Sans KR', sans-serif;
     font-size:0.78rem; color:var(--mint); letter-spacing:0.05em;
     margin-bottom:22px;
     display:inline-flex; align-items:center; gap:8px;
@@ -98,9 +122,10 @@
   }
   .btn-secondary:hover{border-color:var(--mint); background:rgba(87,217,166,0.06);}
 
+  section, header{scroll-margin-top:64px;}
   section{padding:68px 0; border-top:1px solid var(--line);}
   .num-tag{
-    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--mint);
+    font-family:'IBM Plex Sans KR', sans-serif; font-size:0.78rem; color:var(--mint);
     margin-bottom:14px; letter-spacing:0.03em;
   }
   h2.sec-title{
@@ -136,7 +161,7 @@
   }
   .tl-row:last-child{border-bottom:1px solid var(--line);}
   .tl-num{
-    font-family:'IBM Plex Mono', monospace; font-size:0.85rem; color:var(--mint);
+    font-family:'IBM Plex Sans KR', sans-serif; font-size:0.85rem; color:var(--mint);
     padding-top:2px;
   }
   .tl-body h3{font-size:0.99rem; font-weight:600; margin-bottom:4px;}
@@ -150,8 +175,24 @@
     padding:22px 24px; background:linear-gradient(120deg, rgba(87,217,166,0.14), rgba(87,217,166,0.02));
     border:1px solid rgba(87,217,166,0.28);
   }
-  .royalty-line .big{font-family:'IBM Plex Mono', monospace; font-size:1.9rem; font-weight:700; color:var(--mint);}
+  .royalty-line .big{font-family:'IBM Plex Sans KR', sans-serif; font-size:1.9rem; font-weight:700; color:var(--mint);}
   .royalty-line .small{font-size:0.88rem; color:var(--sub);}
+  .lookup-box{
+    margin-top:28px; padding:22px; background:var(--bg-panel); border:1px solid var(--line-strong);
+  }
+  .lookup-label{
+    display:block; font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:12px;
+  }
+  .lookup-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .lookup-row input{
+    flex:1; min-width:180px; padding:12px 14px; font-size:0.92rem;
+    font-family:'IBM Plex Sans KR', sans-serif; color:var(--text);
+    background:#fff; border:1px solid var(--line-strong);
+    outline:none; transition:border-color .15s ease;
+  }
+  .lookup-row input:focus{border-color:var(--mint);}
+  .lookup-row .btn-primary{padding:12px 22px; font-size:0.88rem; white-space:nowrap;}
+
   .dash-panel{
     margin-top:32px; border:1px solid var(--line-strong); background:var(--bg-panel);
   }
@@ -160,7 +201,7 @@
     padding:16px 20px; border-bottom:1px solid var(--line);
   }
   .dash-head .dash-name{
-    font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--sub); letter-spacing:0.03em;
+    font-family:'IBM Plex Sans KR', sans-serif; font-size:0.8rem; color:var(--sub); letter-spacing:0.03em;
   }
   .dash-head .dash-sample{
     font-size:0.72rem; color:var(--amber); border:1px solid rgba(242,184,75,0.4);
@@ -173,7 +214,7 @@
   .stat-cell{background:var(--bg-panel); padding:22px 18px; transition:background .15s ease;}
   .stat-cell:hover{background:var(--bg-panel-2);}
   .stat-cell .stat-label{font-size:0.76rem; color:var(--sub); margin-bottom:12px;}
-  .stat-cell .stat-val{font-family:'IBM Plex Mono', monospace; font-size:1.5rem; font-weight:700; color:var(--mint);}
+  .stat-cell .stat-val{font-family:'IBM Plex Sans KR', sans-serif; font-size:1.5rem; font-weight:700; color:var(--mint);}
   .stat-cell .stat-val .unit{font-size:0.85rem; font-weight:500; color:var(--sub); margin-left:2px;}
   .stat-cell .stat-delta{font-size:0.74rem; color:var(--mint); margin-top:6px;}
   .stat-cell .stat-delta.flat{color:var(--sub);}
@@ -198,13 +239,13 @@
   }
   .lb-panel .lb-row:first-of-type{border-top:none;}
   .lb-rank{
-    font-family:'IBM Plex Mono', monospace; font-size:0.95rem; color:var(--sub); font-weight:600;
+    font-family:'IBM Plex Sans KR', sans-serif; font-size:0.95rem; color:var(--sub); font-weight:600;
   }
   .lb-row.top .lb-rank{color:var(--mint);}
   .lb-row.top{background:rgba(87,217,166,0.05);}
   .lb-team .team-name{font-size:0.92rem; font-weight:600;}
   .lb-team .program-name{font-size:0.8rem; color:var(--sub); margin-top:2px;}
-  .lb-metric{font-family:'IBM Plex Mono', monospace; font-size:0.86rem; text-align:right;}
+  .lb-metric{font-family:'IBM Plex Sans KR', sans-serif; font-size:0.86rem; text-align:right;}
   .lb-metric .lb-label{display:block; font-family:'IBM Plex Sans KR',sans-serif; font-size:0.7rem; color:var(--sub); font-weight:400; margin-bottom:3px;}
   .lb-metric.sat{color:var(--mint);}
   .lb-metric.rev{color:var(--amber);}
@@ -227,7 +268,7 @@
   .team-card{background:var(--bg-panel); padding:24px 18px; transition:background .15s ease;}
   .team-card:hover{background:var(--bg-panel-2);}
   .team-card .name{font-weight:700; font-size:0.98rem;}
-  .team-card .track{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--mint); margin-top:10px; display:block;}
+  .team-card .track{font-family:'IBM Plex Sans KR', sans-serif; font-size:0.72rem; color:var(--mint); margin-top:10px; display:block;}
   .team-card .track.eng{color:var(--amber);}
   .team-card .major{margin-top:8px; font-size:0.84rem; color:var(--sub);}
 
@@ -250,14 +291,14 @@
     background:rgba(87,217,166,0.04);
   }
   .apply-info .who{font-size:0.82rem; color:var(--sub); margin-bottom:6px;}
-  .apply-info .contact{font-family:'IBM Plex Mono', monospace; font-size:1.25rem; font-weight:700; color:var(--mint);}
+  .apply-info .contact{font-family:'IBM Plex Sans KR', sans-serif; font-size:1.25rem; font-weight:700; color:var(--mint);}
   .form-cta{
     margin-top:36px; padding:32px; text-align:center;
     border:1px solid rgba(87,217,166,0.35);
     background:linear-gradient(120deg, rgba(87,217,166,0.12), rgba(87,217,166,0.02));
   }
   .form-cta .form-eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(--mint); letter-spacing:0.04em; margin-bottom:10px;
+    font-family:'IBM Plex Sans KR', sans-serif; font-size:0.76rem; color:var(--mint); letter-spacing:0.04em; margin-bottom:10px;
   }
   .form-cta h3{font-size:1.15rem; font-weight:700; margin-bottom:18px;}
   .form-cta .btn-primary{font-size:0.96rem; padding:15px 30px;}
@@ -271,7 +312,7 @@
     display:flex; align-items:center; justify-content:center; font-size:1rem;
   }
   .contact-cell .c-body .c-label{font-size:0.76rem; color:var(--sub); margin-bottom:4px;}
-  .contact-cell .c-body .c-value{font-family:'IBM Plex Mono', monospace; font-size:0.96rem; font-weight:600; color:var(--text);}
+  .contact-cell .c-body .c-value{font-family:'IBM Plex Sans KR', sans-serif; font-size:0.96rem; font-weight:600; color:var(--text);}
   .contact-cell a.c-body{display:block;}
   .contact-cell:hover .c-value{color:var(--mint);}
 
@@ -302,7 +343,22 @@
 <nav>
   <div class="wrap">
     <div class="brand"><span class="dot"></span>한과연</div>
-    <a class="nav-cta" href="#apply">지원 문의</a>
+    <div class="nav-right">
+      <a class="nav-cta" href="#apply">지원 문의</a>
+      <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="menu-panel" id="menuPanel">
+      <a href="#about">Who We Are</a>
+      <a href="#callout">초기 운영진이란</a>
+      <a href="#flow">한 학기 흐름</a>
+      <a href="#asset">자산 · 대시보드</a>
+      <a href="#fit">추천 대상</a>
+      <a href="#team">창립 멤버</a>
+      <a href="#roles">운영진 역할</a>
+      <a href="#apply">지원하기</a>
+    </div>
   </div>
 </nav>
 
@@ -318,7 +374,7 @@
   </div>
 </header>
 
-<section>
+<section id="about">
   <div class="wrap">
     <div class="num-tag">01 · Who We Are</div>
     <h2 class="sec-title">서로 다른 전공이, 같은 프로그램을 만듭니다</h2>
@@ -337,7 +393,7 @@
   </div>
 </section>
 
-<section class="callout">
+<section id="callout" class="callout">
   <div class="wrap">
     <div class="num-tag">02 · 그런데 지금은 조금 다릅니다</div>
     <h2 data-reveal>한과연은 아직 정식으로 만들어지지 않았습니다.</h2>
@@ -363,7 +419,7 @@
   </div>
 </section>
 
-<section>
+<section id="asset">
   <div class="wrap">
     <div class="num-tag">04 · Your Asset</div>
     <h2 class="sec-title">내가 만든 교육이, 자산이 됩니다</h2>
@@ -376,40 +432,47 @@
         <span class="small">한과연 연계 스타트업 수익 중 프로그램 제작팀에게 지급되는 비율</span>
       </div>
 
-      <p>"동아리 활동했어요"가 아니라, "제가 만든 교육이 이만큼의 학생에게, 이만큼의 가치를 만들었습니다"라고 말할 수 있는 스펙이 됩니다. 매 학기 쌓이는 프로그램은 대시보드에서 수치로 확인할 수 있어요.</p>
+      <p>"동아리 활동했어요"가 아니라, "제가 만든 교육이 이만큼의 학생에게, 이만큼의 가치를 만들었습니다"라고 말할 수 있는 스펙이 됩니다. 우리 팀 이름을 입력하면 대시보드를 바로 볼 수 있어요.</p>
+
+      <div class="lookup-box">
+        <label class="lookup-label" for="teamNameInput">팀 이름을 입력해보세요</label>
+        <div class="lookup-row">
+          <input type="text" id="teamNameInput" placeholder="예: 리틀뉴턴" maxlength="24">
+          <button class="btn-primary" id="teamLookupBtn" type="button">대시보드 조회</button>
+        </div>
+      </div>
 
       <div class="dash-panel">
         <div class="dash-head">
-          <span class="dash-name">KitHub / Team Dashboard</span>
-          <span class="dash-sample">예시 화면</span>
+          <span class="dash-name" id="dashName">KitHub / Team Dashboard</span>
         </div>
         <div class="stat-row">
           <div class="stat-cell">
             <div class="stat-label">교육 만족도</div>
-            <div class="stat-val">94<span class="unit">%</span></div>
-            <div class="stat-delta">▲ 지난 회차 대비 6%p</div>
-            <div class="spark"><i style="height:35%"></i><i style="height:50%"></i><i style="height:40%"></i><i style="height:70%"></i><i class="on" style="height:100%"></i></div>
+            <div class="stat-val" id="satVal">94<span class="unit">%</span></div>
+            <div class="stat-delta" id="satDelta">▲ 지난 회차 대비 6%p</div>
+            <div class="spark" id="sparkSat"><i style="height:35%"></i><i style="height:50%"></i><i style="height:40%"></i><i style="height:70%"></i><i class="on" style="height:100%"></i></div>
           </div>
           <div class="stat-cell">
             <div class="stat-label">누적 수익</div>
-            <div class="stat-val">128<span class="unit">만원</span></div>
-            <div class="stat-delta">▲ 이번 학기 누적</div>
-            <div class="spark"><i style="height:20%"></i><i style="height:30%"></i><i style="height:55%"></i><i style="height:75%"></i><i class="on" style="height:100%"></i></div>
+            <div class="stat-val" id="revVal">128<span class="unit">만원</span></div>
+            <div class="stat-delta" id="revDelta">▲ 이번 학기 누적</div>
+            <div class="spark" id="sparkRev"><i style="height:20%"></i><i style="height:30%"></i><i style="height:55%"></i><i style="height:75%"></i><i class="on" style="height:100%"></i></div>
           </div>
           <div class="stat-cell">
             <div class="stat-label">프로그램 순위</div>
-            <div class="stat-val">1<span class="unit">위 / 6팀</span></div>
-            <div class="stat-delta">▲ 만족도 기준</div>
-            <div class="spark"><i style="height:60%"></i><i style="height:45%"></i><i style="height:70%"></i><i style="height:85%"></i><i class="on" style="height:100%"></i></div>
+            <div class="stat-val" id="rankVal">1<span class="unit">위 / 6팀</span></div>
+            <div class="stat-delta" id="rankDelta">▲ 만족도 기준</div>
+            <div class="spark" id="sparkRank"><i style="height:60%"></i><i style="height:45%"></i><i style="height:70%"></i><i style="height:85%"></i><i class="on" style="height:100%"></i></div>
           </div>
           <div class="stat-cell">
             <div class="stat-label">아카이빙 건수</div>
-            <div class="stat-val">3<span class="unit">건</span></div>
-            <div class="stat-delta flat">1차 파일럿 기준</div>
-            <div class="spark"><i style="height:33%"></i><i style="height:33%"></i><i style="height:66%"></i><i style="height:66%"></i><i class="on" style="height:100%"></i></div>
+            <div class="stat-val" id="archVal">3<span class="unit">건</span></div>
+            <div class="stat-delta flat" id="archDelta">1차 파일럿 기준</div>
+            <div class="spark" id="sparkArch"><i style="height:33%"></i><i style="height:33%"></i><i style="height:66%"></i><i style="height:66%"></i><i class="on" style="height:100%"></i></div>
           </div>
         </div>
-        <div class="dash-foot">* 정식 출범 전 예시 데이터입니다. 실제 운영 시 팀별 수치로 채워집니다.</div>
+        <div class="dash-foot">* 실제 운영 데이터가 아닌, 팀 이름을 바탕으로 생성된 체험용 수치입니다.</div>
       </div>
 
       <p style="margin-top:28px;">완성된 프로그램은 팀별로 나란히 순위가 매겨져, 내 프로그램이 다른 팀과 비교해 어느 정도 위치인지 한눈에 보입니다.</p>
@@ -417,35 +480,34 @@
       <div class="lb-panel">
         <div class="dash-head">
           <span class="dash-name">KitHub / Program Leaderboard</span>
-          <span class="dash-sample">예시 화면</span>
         </div>
         <div class="lb-row top">
           <div class="lb-rank">01</div>
-          <div class="lb-team"><div class="team-name">Team 리틀뉴턴</div><div class="program-name">고등 대상 · 힘과 운동 실험 키트</div></div>
+          <div class="lb-team"><div class="team-name">리틀뉴턴</div><div class="program-name">고등 대상 · 힘과 운동 실험 키트</div></div>
           <div class="lb-metric sat"><span class="lb-label">만족도</span>94%</div>
           <div class="lb-metric rev"><span class="lb-label">누적 수익</span>128만원</div>
         </div>
         <div class="lb-row">
           <div class="lb-rank">02</div>
-          <div class="lb-team"><div class="team-name">Team 코드마루</div><div class="program-name">중등 대상 · 아두이노 피지컬 컴퓨팅</div></div>
+          <div class="lb-team"><div class="team-name">코드마루</div><div class="program-name">중등 대상 · 아두이노 피지컬 컴퓨팅</div></div>
           <div class="lb-metric sat"><span class="lb-label">만족도</span>91%</div>
           <div class="lb-metric rev"><span class="lb-label">누적 수익</span>96만원</div>
         </div>
         <div class="lb-row">
           <div class="lb-rank">03</div>
-          <div class="lb-team"><div class="team-name">Team 에코랩</div><div class="program-name">중등 대상 · 생태 관찰 프로젝트</div></div>
+          <div class="lb-team"><div class="team-name">에코랩</div><div class="program-name">중등 대상 · 생태 관찰 프로젝트</div></div>
           <div class="lb-metric sat"><span class="lb-label">만족도</span>88%</div>
           <div class="lb-metric rev"><span class="lb-label">누적 수익</span>74만원</div>
         </div>
         <div class="lb-row">
           <div class="lb-rank">04</div>
-          <div class="lb-team"><div class="team-name">Team 스파크</div><div class="program-name">중등 대상 · 회로와 전자기 기초</div></div>
+          <div class="lb-team"><div class="team-name">스파크</div><div class="program-name">중등 대상 · 회로와 전자기 기초</div></div>
           <div class="lb-metric sat"><span class="lb-label">만족도</span>85%</div>
           <div class="lb-metric rev"><span class="lb-label">누적 수익</span>41만원</div>
         </div>
         <div class="lb-row">
           <div class="lb-rank">05</div>
-          <div class="lb-team"><div class="team-name">Team 오브젝트</div><div class="program-name">고등 대상 · 3D 모델링 입문</div></div>
+          <div class="lb-team"><div class="team-name">오브젝트</div><div class="program-name">고등 대상 · 3D 모델링 입문</div></div>
           <div class="lb-metric sat"><span class="lb-label">만족도</span>83%</div>
           <div class="lb-metric rev"><span class="lb-label">누적 수익</span>19만원</div>
         </div>
@@ -455,7 +517,7 @@
   </div>
 </section>
 
-<section>
+<section id="fit">
   <div class="wrap">
     <div class="num-tag">05 · Who We're Looking For</div>
     <h2 class="sec-title">이런 분들께 추천해요</h2>
@@ -489,7 +551,7 @@
   </div>
 </section>
 
-<section>
+<section id="team">
   <div class="wrap">
     <div class="num-tag">06 · Founding Members</div>
     <h2 class="sec-title">지금 함께하고 있는 사람들</h2>
@@ -505,7 +567,7 @@
   </div>
 </section>
 
-<section>
+<section id="roles">
   <div class="wrap">
     <div class="num-tag">07 · Founding Roles</div>
     <h2 class="sec-title">함께할 운영진 역할</h2>
@@ -561,6 +623,77 @@
     });
   }, {threshold:0.12});
   items.forEach(el=>io.observe(el));
+
+  // ---- nav menu toggle ----
+  const menuBtn = document.getElementById('menuBtn');
+  const menuPanel = document.getElementById('menuPanel');
+  menuBtn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const open = menuPanel.classList.toggle('open');
+    menuBtn.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menuPanel.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      menuPanel.classList.remove('open');
+      menuBtn.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+    });
+  });
+  document.addEventListener('click', (e)=>{
+    if(!menuPanel.contains(e.target) && e.target !== menuBtn){
+      menuPanel.classList.remove('open');
+      menuBtn.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+    }
+  });
+
+  // ---- team name lookup dashboard (demo data, deterministic per name) ----
+  function hashStr(s){
+    let h = 0;
+    for(let i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i)) >>> 0; }
+    return h;
+  }
+  function sparkBars(seed, offset){
+    let out = '';
+    for(let i=0;i<5;i++){
+      const v = i===4 ? 100 : 22 + ((seed >> (offset + i*4)) % 74);
+      out += `<i class="${i===4?'on':''}" style="height:${v}%"></i>`;
+    }
+    return out;
+  }
+  function renderTeam(name){
+    const h = hashStr(name);
+    const sat = 76 + (h % 21);            // 76-96 %
+    const rev = 12 + ((h >> 4) % 134);    // 12-145 만원
+    const rank = 1 + ((h >> 9) % 8);      // 1-8 위
+    const arch = 1 + ((h >> 13) % 5);     // 1-5 건
+    const delta = 2 + (h % 9);            // 2-10 %p
+
+    document.getElementById('dashName').textContent = `KitHub / ${name} Dashboard`;
+    document.getElementById('satVal').innerHTML = `${sat}<span class="unit">%</span>`;
+    document.getElementById('satDelta').textContent = `▲ 지난 회차 대비 ${delta}%p`;
+    document.getElementById('revVal').innerHTML = `${rev}<span class="unit">만원</span>`;
+    document.getElementById('revDelta').textContent = `▲ 이번 학기 누적`;
+    document.getElementById('rankVal').innerHTML = `${rank}<span class="unit">위 / 8팀</span>`;
+    document.getElementById('rankDelta').textContent = `▲ 만족도 기준`;
+    document.getElementById('archVal').innerHTML = `${arch}<span class="unit">건</span>`;
+    document.getElementById('archDelta').textContent = `1차 파일럿 기준`;
+
+    document.getElementById('sparkSat').innerHTML = sparkBars(h, 0);
+    document.getElementById('sparkRev').innerHTML = sparkBars(h, 5);
+    document.getElementById('sparkRank').innerHTML = sparkBars(h, 10);
+    document.getElementById('sparkArch').innerHTML = sparkBars(h, 15);
+  }
+  const teamInput = document.getElementById('teamNameInput');
+  const teamBtn = document.getElementById('teamLookupBtn');
+  function doLookup(){
+    const name = teamInput.value.trim();
+    if(!name){ teamInput.focus(); teamInput.placeholder = '팀 이름을 입력해주세요'; return; }
+    renderTeam(name);
+  }
+  teamBtn.addEventListener('click', doLookup);
+  teamInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') doLookup(); });
 </script>
 
 </body>
